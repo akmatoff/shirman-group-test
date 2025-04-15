@@ -106,7 +106,7 @@ export default function UpdateProductModal({
                           form.setValue(
                             "price",
                             value === "" ? 0 : Number(value),
-                            { shouldDirty: true }
+                            { shouldDirty: true, shouldValidate: true }
                           );
                         }}
                       />
