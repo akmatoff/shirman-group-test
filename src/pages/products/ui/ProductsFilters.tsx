@@ -1,3 +1,8 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/shared/components/ui/tooltip";
 import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
 import { QueryParamKeys } from "@/shared/queryParamKeys";
 import CategorySelect from "@/widgets/category-select/ui/CategorySelect";
@@ -22,10 +27,15 @@ export default function ProductsFilters() {
   return (
     <div className="w-full flex items-center justify-end space-x-3">
       {hasFilters ? (
-        <FunnelXIcon
-          className="w-5 text-muted-foreground cursor-pointer"
-          onClick={handleClear}
-        />
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <FunnelXIcon
+              className="w-5 text-muted-foreground cursor-pointer"
+              onClick={handleClear}
+            />
+          </TooltipTrigger>
+          <TooltipContent>Очистить фильтры</TooltipContent>
+        </Tooltip>
       ) : (
         <FunnelIcon className="w-5 text-muted-foreground" />
       )}

@@ -28,8 +28,8 @@ export default function ProductsTable() {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-3">
+    <div className="w-full">
+      <div className="flex flex-col md:flex-row mb-3">
         <h1 className="font-bold text-lg min-w-48">Список товаров</h1>
 
         <ProductsFilters />

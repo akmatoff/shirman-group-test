@@ -25,9 +25,9 @@ export default function PriceTableHeader() {
       <div>Цена</div>
 
       {orderParam === "asc" || !orderParam ? (
-        <ArrowUpIcon className="w-4 h-4" />
+        <ArrowUpIcon className="w-4 h-4 text-primary" />
       ) : (
-        <ArrowDownIcon className="w-4 h-4" />
+        <ArrowDownIcon className="w-4 h-4 text-primary" />
       )}
     </div>
   );
