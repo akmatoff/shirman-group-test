@@ -3,6 +3,13 @@ export interface IProduct {
     title: string;
     price: number;
     description: string;
-    category: string;
+    category: ICategory;
+    images: string[];
+}
+
+export interface ICategory {
+    id: number;
+    name: string;
     image: string;
+    slug: string;
 }

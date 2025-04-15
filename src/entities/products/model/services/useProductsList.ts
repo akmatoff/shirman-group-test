@@ -2,14 +2,18 @@ import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../../../shared/queryKeys";
 import getProductsList from "../api/getProductsList";
 
-export default function useProductsList() {
-    const { data, isPending } = useQuery({
-        queryKey: [QUERY_KEYS.PRODUCTS_LIST],
-        queryFn: getProductsList
-    })
+interface Params {
+  categoryId?: number;
+}
 
-    return {
-        products: data,
-        isProductsLoading: isPending
-    }
+export default function useProductsList(params?: Params) {
+  const { data, isPending } = useQuery({
+    queryKey: [QUERY_KEYS.PRODUCTS_LIST, params?.categoryId],
+    queryFn: () => getProductsList(params),
+  });
+
+  return {
+    products: data,
+    isProductsLoading: isPending,
+  };
 }

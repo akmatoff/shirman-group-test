@@ -57,9 +57,13 @@ export function DataTable<TData, TValue>({
         </TableHeader>
         <TableBody>
           {isLoading && (
-            <div className="flex items-center justify-center h-32 w-full">
-              <LoadingSpinner />
-            </div>
+            <TableRow>
+              <TableCell colSpan={columns.length}>
+                <div className="flex items-center justify-center h-32 w-full">
+                  <LoadingSpinner />
+                </div>
+              </TableCell>
+            </TableRow>
           )}
 
           {!!table.getRowModel().rows?.length &&
