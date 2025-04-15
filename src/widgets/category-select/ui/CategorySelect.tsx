@@ -47,7 +47,7 @@ export default function CategorySelect({ value }: Props) {
 
           {!isCategoriesLoading &&
             categories?.map((category) => (
-              <SelectItem key={category.id} value={category.id.toString()}>
+              <SelectItem key={category.slug} value={category.slug}>
                 {category.name}
               </SelectItem>
             ))}

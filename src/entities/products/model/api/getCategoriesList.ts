@@ -3,6 +3,6 @@ import { ICategory } from "../types";
 
 export default async function getCategoriesList() {
   return axios
-    .get<ICategory[]>("https://api.escuelajs.co/api/v1/categories")
+    .get<ICategory[]>("https://dummyjson.com/products/categories")
     .then(({ data }) => data);
 }

@@ -20,6 +20,8 @@ import {
   FormMessage,
 } from "@/shared/components/ui/form";
 import { Input } from "@/shared/components/ui/input";
+import useUpdateProduct from "@/entities/products/model/services/useUpdateProduct";
+import LoadingSpinner from "@/shared/ui/loading-spinner";
 
 interface Props {
   isOpen: boolean;
@@ -32,6 +34,13 @@ export default function UpdateProductModal({
   onOpenChange,
   product,
 }: Props) {
+  const { updateProduct, isUpdatingProduct } = useUpdateProduct({
+    id: product.id,
+    onSuccess: () => {
+      onOpenChange(false);
+    },
+  });
+
   const form = useForm({
     values: {
       title: product.title,
@@ -43,10 +52,12 @@ export default function UpdateProductModal({
   });
 
   const isButtonDisabled =
-    Object.values(form.formState.errors).length > 0 || !form.formState.isDirty;
+    Object.values(form.formState.errors).length > 0 ||
+    !form.formState.isDirty ||
+    isUpdatingProduct;
 
   const onSubmit = (data: Partial<IProduct>) => {
-    console.log(data);
+    updateProduct(data);
   };
 
   return (
@@ -108,9 +119,13 @@ export default function UpdateProductModal({
 
             <DialogFooter>
               <Button disabled={isButtonDisabled} type="submit">
-                Сохранить
+                Сохранить {isUpdatingProduct && <LoadingSpinner />}
               </Button>
-              <Button variant="outline" onClick={() => onOpenChange(false)}>
+              <Button
+                variant="outline"
+                onClick={() => onOpenChange(false)}
+                type="button"
+              >
                 Отмена
               </Button>
             </DialogFooter>

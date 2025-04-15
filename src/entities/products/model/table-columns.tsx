@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { IProduct } from "./types";
+import PriceTableHeader from "./PriceTableHeader";
 
 export const columns: ColumnDef<IProduct>[] = [
   {
@@ -17,8 +18,12 @@ export const columns: ColumnDef<IProduct>[] = [
   },
   {
     accessorKey: "price",
-    header: "Цена",
-    cell: ({ row }) => <span>${row.original.price}</span>,
+    header: () => <PriceTableHeader />,
+    cell: ({ row }) => (
+      <span className="bg-primary rounded-lg px-3 py-1 text-white">
+        ${row.original.price}
+      </span>
+    ),
   },
   {
     accessorKey: "category",

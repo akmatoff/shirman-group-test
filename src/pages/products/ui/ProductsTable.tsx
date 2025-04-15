@@ -17,9 +17,9 @@ export default function ProductsTable() {
   const [searchParams] = useSearchParams();
 
   const { products, isProductsLoading } = useProductsList({
-    categoryId: searchParams.get(QueryParamKeys.Category)
-      ? Number(searchParams.get(QueryParamKeys.Category))
-      : undefined,
+    category: searchParams.get(QueryParamKeys.Category) ?? undefined,
+    sortBy: searchParams.get(QueryParamKeys.OrderBy) ?? undefined,
+    order: searchParams.get(QueryParamKeys.Order) ?? undefined,
   });
 
   const handleRowClick = (product: IProduct) => {

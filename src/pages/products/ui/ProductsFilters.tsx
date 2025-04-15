@@ -12,7 +12,11 @@ export default function ProductsFilters() {
   const hasFilters = searchParams.toString().length > 0;
 
   const handleClear = () => {
-    udpateQueryParams({ [QueryParamKeys.Category]: undefined });
+    udpateQueryParams({
+      [QueryParamKeys.Category]: undefined,
+      [QueryParamKeys.Order]: undefined,
+      [QueryParamKeys.OrderBy]: undefined,
+    });
   };
 
   return (

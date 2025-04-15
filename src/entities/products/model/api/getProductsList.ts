@@ -1,12 +1,21 @@
 import axios from "axios";
-import { IProduct } from "../types";
+import { IProductsBaseResponse } from "@/shared/api/types";
 
 interface Params {
-  categoryId?: number;
+  category?: string;
+  sortBy?: string;
+  order?: string;
 }
 
 export default async function getProductsList(params?: Params) {
   return axios
-    .get<IProduct[]>("https://api.escuelajs.co/api/v1/products", { params })
-    .then(({ data }) => data);
+    .get<IProductsBaseResponse>(
+      params?.category
+        ? `https://dummyjson.com/products/category/${params.category}`
+        : "https://dummyjson.com/products",
+      {
+        params,
+      }
+    )
+    .then(({ data }) => data.products);
 }
