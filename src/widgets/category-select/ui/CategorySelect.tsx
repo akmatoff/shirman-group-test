@@ -12,9 +12,11 @@ import { useUpdateQueryParams } from "@/shared/hooks/useUpdateQueryParams";
 import { QueryParamKeys } from "@/shared/queryParamKeys";
 import LoadingSpinner from "@/shared/ui/loading-spinner";
 
-interface Props {}
+interface Props {
+  value?: string;
+}
 
-export default function CategorySelect({}: Props) {
+export default function CategorySelect({ value }: Props) {
   const { categories, isCategoriesLoading } = useCategoriesList();
 
   const updateQueryParams = useUpdateQueryParams();
@@ -24,7 +26,7 @@ export default function CategorySelect({}: Props) {
   };
 
   return (
-    <Select onValueChange={handleChange}>
+    <Select onValueChange={handleChange} value={value ?? ""}>
       <SelectTrigger className="max-w-48">
         <SelectValue placeholder="Выберите категорию..." />
       </SelectTrigger>

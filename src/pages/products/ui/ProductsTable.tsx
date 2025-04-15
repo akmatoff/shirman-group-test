@@ -4,8 +4,16 @@ import { DataTable } from "@/shared/ui/data-table";
 import ProductsFilters from "./ProductsFilters";
 import { useSearchParams } from "react-router-dom";
 import { QueryParamKeys } from "@/shared/queryParamKeys";
+import { IProduct } from "@/entities/products/model/types";
+import { useState } from "react";
+import UpdateProductModal from "./UpdateProductModal";
 
 export default function ProductsTable() {
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<
+    IProduct | undefined
+  >();
+
   const [searchParams] = useSearchParams();
 
   const { products, isProductsLoading } = useProductsList({
@@ -13,6 +21,11 @@ export default function ProductsTable() {
       ? Number(searchParams.get(QueryParamKeys.Category))
       : undefined,
   });
+
+  const handleRowClick = (product: IProduct) => {
+    setIsUpdateModalOpen(true);
+    setSelectedProduct(product);
+  };
 
   return (
     <div>
@@ -25,7 +38,16 @@ export default function ProductsTable() {
         columns={columns}
         data={products ?? []}
         isLoading={isProductsLoading}
+        onRowClick={handleRowClick}
       />
+
+      {!!selectedProduct && (
+        <UpdateProductModal
+          isOpen={isUpdateModalOpen}
+          onOpenChange={setIsUpdateModalOpen}
+          product={selectedProduct}
+        />
+      )}
     </div>
   );
 }

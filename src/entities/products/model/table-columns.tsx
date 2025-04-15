@@ -1,7 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { IProduct } from "./types";
-import { MoreHorizontalIcon } from "lucide-react";
-import { Button } from "@/shared/components/ui/button";
 
 export const columns: ColumnDef<IProduct>[] = [
   {
@@ -26,16 +24,5 @@ export const columns: ColumnDef<IProduct>[] = [
     accessorKey: "category",
     header: "Категория",
     cell: ({ row }) => row.original.title,
-  },
-  {
-    accessorKey: "actions",
-    header: "",
-    cell: () => (
-      <div>
-        <Button variant="outline" className="rounded-full px-2">
-          <MoreHorizontalIcon />
-        </Button>
-      </div>
-    ),
   },
 ];
